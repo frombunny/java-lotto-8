@@ -7,12 +7,6 @@ public class InputValidator {
         }
     }
 
-    public void validateNumberRange(int number) {
-        if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
-        }
-    }
-
     public void validateNumeric(String input) {
         if (!isNumeric(input)) {
             throw new IllegalArgumentException("[ERROR] 숫자만 입력할 수 있습니다.");
