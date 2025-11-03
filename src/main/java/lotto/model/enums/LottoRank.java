@@ -5,28 +5,38 @@ import java.util.List;
 import java.util.function.Predicate;
 import lotto.model.Lotto;
 
-public enum LottoResult {
-    FIRST(6, (bonus) -> true),
-    SECOND(5, (bonus) -> bonus),
-    THIRD(5, (bonus) -> !bonus),
-    FOURTH(4, (bonus) -> true),
-    FIFTH(3, (bonus) -> true),
-    LOSE(0, (bonus) -> true);
+public enum LottoRank {
+    FIRST(6, (bonus) -> true, 2000000000),
+    SECOND(5, (bonus) -> bonus, 30000000),
+    THIRD(5, (bonus) -> !bonus, 1500000),
+    FOURTH(4, (bonus) -> true, 50000),
+    FIFTH(3, (bonus) -> true, 5000),
+    LOSE(0, (bonus) -> true, 0);
 
     private final int winningNumbersCount;
     private final Predicate<Boolean> bonusCondition;
+    private final long reward;
 
-    LottoResult(int winningNumbersCount, Predicate<Boolean> bonusCondition) {
+    LottoRank(int winningNumbersCount, Predicate<Boolean> bonusCondition, long reward) {
         this.winningNumbersCount = winningNumbersCount;
         this.bonusCondition = bonusCondition;
+        this.reward = reward;
     }
 
-    public static LottoResult of(Lotto lotto, List<Integer> winningNumbers, int bonusNumber) {
+    public long getReward(){
+        return reward;
+    }
+
+    public String getFormattedReward() {
+        return String.format("%,d", reward);
+    }
+
+    public static LottoRank determineRank(Lotto lotto, List<Integer> winningNumbers, int bonusNumber) {
         int matchCount = lotto.countMatchedNumbers(winningNumbers);
         boolean hasBonusNumber = lotto.hasBonusNumber(bonusNumber);
 
         return Arrays.stream(values())
-                .filter(lottoResult -> lottoResult.isMatch(matchCount, hasBonusNumber))
+                .filter(lottoRank -> lottoRank.isMatch(matchCount, hasBonusNumber))
                 .findFirst()
                 .orElse(LOSE);
     }

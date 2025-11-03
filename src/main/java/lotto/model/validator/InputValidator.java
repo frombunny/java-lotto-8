@@ -1,12 +1,6 @@
 package lotto.model.validator;
 
 public class InputValidator {
-    public void validatePurchaseAmount(int amount) {
-        if (amount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위로 입력할 수 있습니다.");
-        }
-    }
-
     public void validateNumeric(String input) {
         if (!isNumeric(input)) {
             throw new IllegalArgumentException("[ERROR] 숫자만 입력할 수 있습니다.");
