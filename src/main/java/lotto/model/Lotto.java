@@ -4,8 +4,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.util.ErrorCode;
 
 public class Lotto {
+    private static final int MAX_NUMBER = 45;
+    private static final int MIN_NUMBER = 1;
+    private static final int REQUIRED_LOTTO_NUMBERS = 6;
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -13,8 +17,8 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto generate(){
-        List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+    public static Lotto generate() {
+        List<Integer> randomNumbers = Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, REQUIRED_LOTTO_NUMBERS);
         return new Lotto(randomNumbers);
     }
 
@@ -35,20 +39,22 @@ public class Lotto {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+        if (numbers.size() != REQUIRED_LOTTO_NUMBERS) {
+            throw new IllegalArgumentException(
+                    ErrorCode.INVALID_LOTTO_SIZE.getFormattedMessage(REQUIRED_LOTTO_NUMBERS));
         }
     }
 
     private void validateNumberRange(List<Integer> numbers) {
-        if (numbers.stream().anyMatch(number -> number < 1 || number > 45)) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+        if (numbers.stream().anyMatch(number -> number < MIN_NUMBER || number > MAX_NUMBER)) {
+            throw new IllegalArgumentException(
+                    ErrorCode.NUMBER_OUT_OF_RANGE.getFormattedMessage(MIN_NUMBER, MAX_NUMBER));
         }
     }
 
     private void validateDuplicateNumber(List<Integer> numbers) {
         if (numbers.size() != numbers.stream().distinct().count()) {
-            throw new IllegalArgumentException("[ERROR] 숫자는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ErrorCode.NUMBER_DUPLICATE.getMessage());
         }
     }
 }
