@@ -56,13 +56,13 @@ public class Lottos {
                 .mapToLong(entry -> entry.getKey().getReward() * entry.getValue())
                 .sum();
 
-        return (double) totalRewards / purchaseMoney;
+        return (double) totalRewards / purchaseMoney * 100;
     }
 
     private static void validatePurchaseMoney(int purchaseMoney) {
         if (purchaseMoney % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(
-                    ErrorCode.INVALID_MONEY.getFormattedMessage(String.format("%,d", LOTTO_PRICE)));
+                    ErrorCode.INVALID_MONEY.getFormattedMessage(LOTTO_PRICE));
         }
     }
 }
