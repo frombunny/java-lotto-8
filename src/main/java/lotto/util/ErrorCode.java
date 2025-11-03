@@ -8,10 +8,8 @@ public enum ErrorCode {
     NUMBER_DUPLICATE("로또 번호는 중복될 수 없습니다."),
     INVALID_LOTTO_SIZE("로또 번호는 %d개여야 합니다.");
 
-
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
     private final String message;
-
 
     ErrorCode(String message) {
         this.message = message;

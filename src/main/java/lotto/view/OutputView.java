@@ -6,7 +6,7 @@ import lotto.model.enums.LottoRank;
 
 public class OutputView {
     public void printPurchaseResult(int count, Lottos lottos) {
-        System.out.println("%d개를 구매했습니다.");
+        System.out.printf("%d개를 구매했습니다.\n", count);
         lottos.getFormattedNumbers().forEach(System.out::println);
     }
 

@@ -35,6 +35,10 @@ public class Lottos {
                 .toList();
     }
 
+    public int getPurchaseCount() {
+        return purchaseMoney / LOTTO_PRICE;
+    }
+
     public LottoResult getLottoResult(List<Integer> winningNumbers, int bonusNumber) {
         Map<LottoRank, Integer> lottoRanks = new HashMap<>();
         for (Lotto lotto : lottos) {
