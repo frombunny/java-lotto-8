@@ -22,6 +22,10 @@ public class Lotto {
         return new Lotto(randomNumbers);
     }
 
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
     public int countMatchedNumbers(List<Integer> winningNumbers) {
         Set<Integer> intersection = new HashSet<>(numbers);
         intersection.retainAll(winningNumbers);

@@ -23,12 +23,19 @@ public enum LottoRank {
         this.reward = reward;
     }
 
-    public long getReward(){
+    public long getReward() {
         return reward;
     }
 
-    public String getFormattedReward() {
-        return String.format("%,d", reward);
+    public String getFormattedResult() {
+        String formattedReward = String.format("%,d원", reward);
+
+        if (this == SECOND) {
+            String bonusText = ", 보너스 볼 일치";
+            return String.format("%d개 일치%s (%s)", winningNumbersCount, bonusText, formattedReward);
+        }
+
+        return String.format("%d개 일치 (%s)", winningNumbersCount, formattedReward);
     }
 
     public static LottoRank determineRank(Lotto lotto, List<Integer> winningNumbers, int bonusNumber) {
