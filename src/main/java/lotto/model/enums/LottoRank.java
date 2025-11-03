@@ -6,12 +6,12 @@ import java.util.function.Predicate;
 import lotto.model.Lotto;
 
 public enum LottoRank {
-    FIRST(6, (bonus) -> true, 2000000000),
-    SECOND(5, (bonus) -> bonus, 30000000),
-    THIRD(5, (bonus) -> !bonus, 1500000),
-    FOURTH(4, (bonus) -> true, 50000),
+    LOSE(0, (bonus) -> true, 0),
     FIFTH(3, (bonus) -> true, 5000),
-    LOSE(0, (bonus) -> true, 0);
+    FOURTH(4, (bonus) -> true, 50000),
+    THIRD(5, (bonus) -> !bonus, 1500000),
+    SECOND(5, (bonus) -> bonus, 30000000),
+    FIRST(6, (bonus) -> true, 2000000000);
 
     private final int winningNumbersCount;
     private final Predicate<Boolean> bonusCondition;

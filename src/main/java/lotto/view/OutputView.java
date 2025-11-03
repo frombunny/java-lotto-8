@@ -14,6 +14,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---");
 
+
         for (LottoRank rank : LottoRank.values()) {
             if (rank == LottoRank.LOSE) {
                 continue;
